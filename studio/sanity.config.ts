@@ -4,6 +4,9 @@ import {visionTool} from '@sanity/vision'
 
 import post from './schemaTypes/post'
 import blockContent from './schemaTypes/blockContent'
+import author from './schemaTypes/author'
+import category from './schemaTypes/category'
+import product from './schemaTypes/product'
 
 export default defineConfig({
   name: 'default',
@@ -15,6 +18,6 @@ export default defineConfig({
   plugins: [structureTool(), visionTool()],
 
   schema: {
-    types: [post, blockContent],
+    types: [post, blockContent, author, category, product],
   },
 })

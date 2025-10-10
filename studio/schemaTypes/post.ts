@@ -1,3 +1,4 @@
+// studio/schemaTypes/post.ts (UPDATED)
 export default {
   name: 'post',
   title: 'Post',
@@ -17,6 +18,13 @@ export default {
         maxLength: 96,
       },
     },
+    // NEW FIELD
+    {
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      to: {type: 'author'},
+    },
     {
       name: 'mainImage',
       title: 'Main image',
@@ -24,6 +32,20 @@ export default {
       options: {
         hotspot: true,
       },
+    },
+    // NEW FIELD
+    {
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'category'}}],
+    },
+    // NEW FIELD
+    {
+      name: 'products',
+      title: 'Related Products',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'product'}}],
     },
     {
       name: 'publishedAt',
@@ -33,14 +55,19 @@ export default {
     {
       name: 'body',
       title: 'Body',
-      type: 'blockContent', // We will create this custom type next
+      type: 'blockContent',
     },
   ],
 
   preview: {
     select: {
       title: 'title',
+      author: 'author.name',
       media: 'mainImage',
+    },
+    prepare(selection: {author: any}) {
+      const {author} = selection
+      return {...selection, subtitle: author && `by ${author}`}
     },
   },
 }
