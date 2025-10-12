@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@portabletext/react": "^4.0.3",
     "@radix-ui/react-navigation-menu": "^1.2.14",
+    "@sanity/image-url": "^1.2.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.545.0",
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.14",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
