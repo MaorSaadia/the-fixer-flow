@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { client } from "../lib/sanity";
+import { client } from "../../lib/sanity";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // Define the structure of a Post
