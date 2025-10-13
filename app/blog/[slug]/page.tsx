@@ -1,17 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// app/blog/[slug]/page.tsx (UPDATED)
+// app/blog/[slug]/page.tsx (COMPLETE AND CORRECTED)
+
 import Image from "next/image";
-import { client } from "../../../lib/sanity"; // Using relative path
+import { client } from "../../../lib/sanity";
 import { PortableText } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
-import { ProductCard } from "@/components/ProductCard"; // <-- IMPORT ProductCard
+import { ProductCard } from "@/components/ProductCard";
+import { Metadata } from "next"; // <-- IMPORT METADATA TYPE
 
-// Helper function to generate image URLs
 const builder = imageUrlBuilder(client);
 function urlFor(source: any) {
   return builder.image(source);
 }
 
+// ✅ DEFINE the Product interface here, which was missing before
 interface Product {
   _id: string;
   productName: string;
@@ -22,15 +24,15 @@ interface Product {
 
 interface Post {
   title: string;
-  mainImage: {
-    asset: { url: string };
-  };
+  mainImage: { asset: object };
   body: any[];
-  products: Product[]; // <-- ADD products to interface
+  products: Product[];
+  excerpt: string;
 }
 
 // This function fetches our specific post AND its products
 async function getPost(slug: string) {
+  // ✅ EXPAND the products query here to be valid GROQ
   const query = `*[_type == "post" && slug.current == "${slug}"][0] {
     title,
     mainImage,
@@ -41,11 +43,30 @@ async function getPost(slug: string) {
       productImage,
       affiliateLink,
       description
-    }
+    },
+    "excerpt": array::join(string::split(pt::text(body), "")[0..155], "") + "..."
   }`;
 
   const post = await client.fetch<Post>(query);
   return post;
+}
+
+// NEW METADATA FUNCTION
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const post = await getPost(params.slug);
+  if (!post) {
+    return {
+      title: "Post not found",
+    };
+  }
+  return {
+    title: post.title,
+    description: post.excerpt,
+  };
 }
 
 // The main page component
@@ -55,6 +76,10 @@ export default async function BlogPostPage({
   params: { slug: string };
 }) {
   const post = await getPost(params.slug);
+
+  if (!post) {
+    return <div>Post not found</div>; // Handle case where post is not found
+  }
 
   return (
     <div className="max-w-3xl mx-auto py-8">
@@ -73,7 +98,7 @@ export default async function BlogPostPage({
             />
           </div>
         )}
-        <div className="prose lg:prose-xl dark:prose-invert">
+        <div className="prose lg:prose-xl dark:prose-invert max-w-full">
           <PortableText value={post.body} />
         </div>
       </article>
