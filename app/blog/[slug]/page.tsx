@@ -1,19 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// app/blog/[slug]/page.tsx (COMPLETE AND CORRECTED)
 
 import Image from "next/image";
 import { client } from "../../../lib/sanity";
 import { PortableText } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
 import { ProductCard } from "@/components/ProductCard";
-import { Metadata } from "next"; // <-- IMPORT METADATA TYPE
+import { Metadata } from "next";
 
 const builder = imageUrlBuilder(client);
 function urlFor(source: any) {
   return builder.image(source);
 }
 
-// ✅ DEFINE the Product interface here, which was missing before
+// ✅ DEFINE a specific type for our page props
+type Props = {
+  params: {
+    slug: string;
+  };
+};
+
 interface Product {
   _id: string;
   productName: string;
@@ -24,15 +29,13 @@ interface Product {
 
 interface Post {
   title: string;
-  mainImage: { asset: object };
+  mainImage: { asset: { _id: string; url: string } };
   body: any[];
   products: Product[];
   excerpt: string;
 }
 
-// This function fetches our specific post AND its products
 async function getPost(slug: string) {
-  // ✅ EXPAND the products query here to be valid GROQ
   const query = `*[_type == "post" && slug.current == "${slug}"][0] {
     title,
     mainImage,
@@ -51,12 +54,8 @@ async function getPost(slug: string) {
   return post;
 }
 
-// NEW METADATA FUNCTION
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+// ✅ APPLY the Props type here
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPost(params.slug);
   if (!post) {
     return {
@@ -69,16 +68,12 @@ export async function generateMetadata({
   };
 }
 
-// The main page component
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+// ✅ APPLY the Props type here
+export default async function BlogPostPage({ params }: Props) {
   const post = await getPost(params.slug);
 
   if (!post) {
-    return <div>Post not found</div>; // Handle case where post is not found
+    return <div>Post not found</div>;
   }
 
   return (
@@ -103,7 +98,6 @@ export default async function BlogPostPage({
         </div>
       </article>
 
-      {/* NEW SECTION FOR PRODUCTS */}
       {post.products && post.products.length > 0 && (
         <section className="mt-16">
           <h2 className="text-3xl font-bold mb-8 border-t pt-8">
