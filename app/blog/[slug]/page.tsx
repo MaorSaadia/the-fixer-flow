@@ -1,9 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import Image from "next/image";
-import { baseClient } from "../../../lib/sanity";
+import { baseClient } from "@/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import { PortableTextComponents } from "@/components/PortableTextComponents";
+import { ReadingProgressBar } from "@/components/ReadingProgressBar";
+import {
+  TableOfContents,
+  MobileTableOfContents,
+} from "@/components/TableOfContents";
+// import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import imageUrlBuilder from "@sanity/image-url";
 import { ProductCard } from "@/components/ProductCard";
 import { Metadata } from "next";
@@ -50,7 +56,7 @@ async function getPost(slug: string) {
     publishedAt,
     "author": author->{name, image},
     "category": categories[0]->title,
-    "readTime": round(length(pt::text(body)) / 450),
+    "readTime": round(length(pt::text(body)) / 250),
     "products": products[]->{
       _id,
       productName,
@@ -99,6 +105,12 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white">
+      {/* Reading Progress Bar */}
+      <ReadingProgressBar />
+
+      {/* Table of Contents - Desktop (Fixed Position) */}
+      <TableOfContents />
+
       {/* Back Button */}
       <div className="container mx-auto px-4 pt-8">
         <Button
@@ -185,6 +197,9 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         )}
 
+        {/* Mobile Table of Contents */}
+        <MobileTableOfContents />
+
         {/* Article Content */}
         <div
           className="prose prose-xl prose-slate max-w-none
@@ -229,7 +244,7 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {post.products.map((product) => (
+              {post.products.map((product: Product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
             </div>
