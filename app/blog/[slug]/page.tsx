@@ -6,13 +6,15 @@ import { PortableText } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
 import { ProductCard } from "@/components/ProductCard";
 import { Metadata } from "next";
+import { Clock, Calendar, ArrowLeft, Share2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const builder = imageUrlBuilder(client);
 function urlFor(source: any) {
   return builder.image(source);
 }
 
-// ✅ DEFINE a specific type for our page props
 type Props = {
   params: Promise<{
     slug: string;
@@ -33,6 +35,10 @@ interface Post {
   body: any[];
   products: Product[];
   excerpt: string;
+  publishedAt: string;
+  author: { name: string; image: any };
+  category: string;
+  readTime: number;
 }
 
 async function getPost(slug: string) {
@@ -40,6 +46,10 @@ async function getPost(slug: string) {
     title,
     mainImage,
     body,
+    publishedAt,
+    "author": author->{name, image},
+    "category": categories[0]->title,
+    "readTime": round(length(pt::text(body)) / 250),
     "products": products[]->{
       _id,
       productName,
@@ -54,7 +64,6 @@ async function getPost(slug: string) {
   return post;
 }
 
-// ✅ APPLY the Props type here
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPost(slug);
@@ -66,42 +75,196 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = await getPost(slug);
 
-  if (!post) return <div>Post not found</div>;
+  if (!post) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-slate-900 mb-4">
+            Post not found
+          </h1>
+          <Button asChild>
+            <Link href="/blog">Back to Blog</Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  const formattedDate = new Date(post.publishedAt).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
-    <div className="max-w-3xl mx-auto py-8">
-      <article>
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white">
+      {/* Back Button */}
+      <div className="container mx-auto px-4 pt-8">
+        <Button
+          asChild
+          variant="ghost"
+          className="mb-4 text-slate-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300"
+        >
+          <Link href="/blog" className="flex items-center gap-2">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Articles
+          </Link>
+        </Button>
+      </div>
+
+      <article className="container mx-auto px-4 max-w-4xl pb-20">
+        {/* Category Badge */}
+        {post.category && (
+          <div className="mb-6">
+            <span className="inline-block px-4 py-2 bg-amber-50 text-amber-700 rounded-full text-sm font-semibold border border-amber-200">
+              {post.category}
+            </span>
+          </div>
+        )}
+
+        {/* Title */}
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-slate-900 leading-tight">
           {post.title}
         </h1>
+
+        {/* Meta Information */}
+        <div className="flex flex-wrap items-center gap-6 mb-8 text-slate-600">
+          {post.author && (
+            <div className="flex items-center gap-3">
+              {post.author.image && (
+                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-amber-500">
+                  <Image
+                    src={urlFor(post.author.image).url()}
+                    alt={post.author.name}
+                    fill
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+              )}
+              <span className="font-semibold text-slate-900">
+                {post.author.name}
+              </span>
+            </div>
+          )}
+
+          <div className="flex items-center gap-2">
+            <Calendar className="w-4 h-4" />
+            <span>{formattedDate}</span>
+          </div>
+
+          {post.readTime && (
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              <span>{post.readTime} min read</span>
+            </div>
+          )}
+
+          <Button
+            variant="outline"
+            size="sm"
+            className="ml-auto border-slate-300 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300"
+          >
+            <Share2 className="w-4 h-4 mr-2" />
+            Share
+          </Button>
+        </div>
+
+        {/* Featured Image */}
         {post.mainImage && (
-          <div className="relative w-full h-96 mb-8">
+          <div className="relative w-full h-[400px] md:h-[600px] mb-12 rounded-2xl overflow-hidden shadow-2xl">
             <Image
               src={urlFor(post.mainImage).url()}
               alt={post.title}
               fill
               style={{ objectFit: "cover" }}
-              className="rounded-lg"
+              priority
             />
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent"></div>
           </div>
         )}
-        <div className="prose lg:prose-xl dark:prose-invert max-w-full">
+
+        {/* Article Content */}
+        <div
+          className="prose prose-lg prose-slate max-w-none
+          prose-headings:font-bold prose-headings:text-slate-900
+          prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-l-4 prose-h2:border-amber-500 prose-h2:pl-4
+          prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+          prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-6
+          prose-a:text-amber-600 prose-a:no-underline hover:prose-a:text-amber-700 hover:prose-a:underline
+          prose-strong:text-slate-900 prose-strong:font-bold
+          prose-ul:my-6 prose-li:my-2
+          prose-img:rounded-xl prose-img:shadow-lg
+          prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic
+          prose-code:bg-slate-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-amber-600 prose-code:font-mono prose-code:text-sm
+        "
+        >
           <PortableText value={post.body} />
         </div>
       </article>
 
+      {/* Products Section */}
       {post.products?.length > 0 && (
-        <section className="mt-16">
-          <h2 className="text-3xl font-bold mb-8 border-t pt-8">
-            Products Mentioned
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {post.products.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
+        <section className="bg-gradient-to-br from-slate-50 to-white py-16 mt-12 border-t border-slate-200">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">
+                Recommended{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">
+                  Products
+                </span>
+              </h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                Carefully selected products mentioned in this guide
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {post.products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </div>
+
+            <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-lg text-center">
+              <p className="text-sm text-slate-600">
+                <strong className="text-slate-900">
+                  Affiliate Disclosure:
+                </strong>{" "}
+                We may earn a commission from purchases made through these links
+                at no extra cost to you.
+              </p>
+            </div>
           </div>
         </section>
       )}
+
+      {/* Newsletter CTA */}
+      <section className="container mx-auto px-4 py-16 max-w-4xl">
+        <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-0 left-1/4 w-64 h-64 bg-amber-500 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-orange-500 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="relative z-10">
+            <h3 className="text-3xl font-bold mb-4">Loved this guide?</h3>
+            <p className="text-slate-300 text-lg mb-8">
+              Subscribe to get more expert tips delivered to your inbox weekly.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-6 py-3 rounded-lg ring-slate-100 ring-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+              <Button className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold px-8 py-4 mt-1.5">
+                Subscribe
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
