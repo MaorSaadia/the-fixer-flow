@@ -94,7 +94,7 @@ export function PostCard({ post, index = 0 }: Props) {
             </CardTitle>
           </CardHeader>
 
-          <CardContent className="flex-grow">
+          <CardContent className="flex-grow -mt-8 -mb-6">
             <p className="text-slate-600 line-clamp-3 leading-relaxed">
               {post.excerpt}
             </p>
