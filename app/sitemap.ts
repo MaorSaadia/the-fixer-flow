@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { client } from "@/lib/sanity";
+import { baseClient } from "@/lib/sanity";
 
 interface Post {
   slug: {
@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "slug": slug.current,
     _updatedAt
   }`;
-  const posts: Post[] = await client.fetch(query);
+  const posts: Post[] = await baseClient.fetch(query);
 
   const postUrls = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
