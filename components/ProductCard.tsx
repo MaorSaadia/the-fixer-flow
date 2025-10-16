@@ -6,9 +6,9 @@ import { ExternalLink, ShoppingCart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import imageUrlBuilder from "@sanity/image-url";
-import { client } from "@/lib/sanity";
+import { baseClient } from "@/lib/sanity";
 
-const builder = imageUrlBuilder(client);
+const builder = imageUrlBuilder(baseClient);
 
 interface Product {
   _id: string;

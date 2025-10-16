@@ -1,4 +1,4 @@
-import { client } from "@/lib/sanity";
+import { baseClient } from "@/lib/sanity";
 import { PostCard, Post } from "@/components/PostCard";
 import { Search, Filter, Grid, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,7 @@ async function getPosts() {
     "excerpt": array::join(string::split(pt::text(body), "")[0..150], "") + "..."
   }`;
 
-  const posts = await client.fetch<Post[]>(query);
+  const posts = await baseClient.fetch<Post[]>(query);
   return posts;
 }
 

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import Image from "next/image";
-import { client } from "../../../lib/sanity";
+import { baseClient } from "../../../lib/sanity";
 import { PortableText } from "@portabletext/react";
+import { PortableTextComponents } from "@/components/PortableTextComponents";
 import imageUrlBuilder from "@sanity/image-url";
 import { ProductCard } from "@/components/ProductCard";
 import { Metadata } from "next";
@@ -10,7 +11,7 @@ import { Clock, Calendar, ArrowLeft, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const builder = imageUrlBuilder(client);
+const builder = imageUrlBuilder(baseClient);
 function urlFor(source: any) {
   return builder.image(source);
 }
@@ -49,7 +50,7 @@ async function getPost(slug: string) {
     publishedAt,
     "author": author->{name, image},
     "category": categories[0]->title,
-    "readTime": round(length(pt::text(body)) / 250),
+    "readTime": round(length(pt::text(body)) / 450),
     "products": products[]->{
       _id,
       productName,
@@ -60,7 +61,7 @@ async function getPost(slug: string) {
     "excerpt": array::join(string::split(pt::text(body), "")[0..155], "") + "..."
   }`;
 
-  const post = await client.fetch<Post>(query);
+  const post = await baseClient.fetch<Post>(query);
   return post;
 }
 
@@ -112,7 +113,7 @@ export default async function BlogPostPage({ params }: Props) {
         </Button>
       </div>
 
-      <article className="container mx-auto px-4 max-w-4xl pb-20">
+      <article className="container mx-auto px-4 max-w-5xl pb-20">
         {/* Category Badge */}
         {post.category && (
           <div className="mb-6">
@@ -186,20 +187,28 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Article Content */}
         <div
-          className="prose prose-lg prose-slate max-w-none
-          prose-headings:font-bold prose-headings:text-slate-900
-          prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-l-4 prose-h2:border-amber-500 prose-h2:pl-4
-          prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
-          prose-p:text-slate-700 prose-p:leading-relaxed prose-p:mb-6
-          prose-a:text-amber-600 prose-a:no-underline hover:prose-a:text-amber-700 hover:prose-a:underline
-          prose-strong:text-slate-900 prose-strong:font-bold
-          prose-ul:my-6 prose-li:my-2
-          prose-img:rounded-xl prose-img:shadow-lg
-          prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic
-          prose-code:bg-slate-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-amber-600 prose-code:font-mono prose-code:text-sm
+          className="prose prose-xl prose-slate max-w-none
+          prose-headings:font-bold prose-headings:text-slate-900 prose-headings:tracking-tight
+          prose-h1:text-5xl prose-h1:mt-16 prose-h1:mb-8 prose-h1:leading-tight
+          prose-h2:text-4xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:border-l-4 prose-h2:border-amber-500 prose-h2:pl-6 prose-h2:leading-tight
+          prose-h3:text-3xl prose-h3:mt-12 prose-h3:mb-6 prose-h3:leading-snug
+          prose-h4:text-2xl prose-h4:mt-8 prose-h4:mb-4
+          prose-p:text-slate-700 prose-p:text-lg prose-p:leading-[1.8] prose-p:mb-8 prose-p:tracking-normal
+          prose-a:text-amber-600 prose-a:font-medium prose-a:no-underline hover:prose-a:text-amber-700 hover:prose-a:underline prose-a:transition-colors
+          prose-strong:text-slate-900 prose-strong:font-bold prose-strong:text-[1.05em]
+          prose-em:text-slate-800 prose-em:italic
+          prose-ul:my-8 prose-ul:space-y-3
+          prose-ol:my-8 prose-ol:space-y-3
+          prose-li:text-slate-700 prose-li:text-lg prose-li:leading-[1.8] prose-li:pl-2
+          prose-li::marker:text-amber-600 prose-li::marker:font-bold
+          prose-img:rounded-xl prose-img:shadow-lg prose-img:my-10
+          prose-blockquote:border-l-4 prose-blockquote:border-amber-500 prose-blockquote:bg-amber-50 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:my-10 prose-blockquote:text-lg prose-blockquote:leading-relaxed
+          prose-code:bg-slate-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-amber-600 prose-code:font-mono prose-code:text-base prose-code:font-medium
+          prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:rounded-xl prose-pre:shadow-lg prose-pre:my-8
+          first-letter:text-6xl first-letter:font-bold first-letter:text-amber-600 first-letter:float-left first-letter:mr-3 first-letter:leading-[0.9]
         "
         >
-          <PortableText value={post.body} />
+          <PortableText value={post.body} components={PortableTextComponents} />
         </div>
       </article>
 
@@ -256,9 +265,9 @@ export default async function BlogPostPage({ params }: Props) {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-6 py-3 rounded-lg ring-slate-100 ring-2 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="flex-1 px-6 py-4 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
-              <Button className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold px-8 py-4 mt-1.5">
+              <Button className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold px-8 py-4">
                 Subscribe
               </Button>
             </div>
