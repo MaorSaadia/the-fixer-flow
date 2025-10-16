@@ -249,7 +249,7 @@ export default async function BlogPostPage({ params }: Props) {
               ))}
             </div>
 
-            <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-lg text-center">
+            <div className="mt-8 -mb-8 p-4 bg-amber-50 border border-amber-200 rounded-lg text-center">
               <p className="text-sm text-slate-600">
                 <strong className="text-slate-900">
                   Affiliate Disclosure:
@@ -263,7 +263,7 @@ export default async function BlogPostPage({ params }: Props) {
       )}
 
       {/* Newsletter CTA */}
-      <section className="container mx-auto px-4 py-16 max-w-4xl">
+      <section className="container mx-auto px-4 py-4 max-w-4xl">
         <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-1/4 w-64 h-64 bg-amber-500 rounded-full blur-3xl"></div>
@@ -280,9 +280,9 @@ export default async function BlogPostPage({ params }: Props) {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-6 py-4 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="flex-1 px-6 py-3 rounded-lg text-slate-100 ring-2 ring-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
-              <Button className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold px-8 py-4">
+              <Button className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold px-8 py-4 mt-1">
                 Subscribe
               </Button>
             </div>

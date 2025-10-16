@@ -154,7 +154,7 @@ export default async function BlogPage() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="container mx-auto px-4 py-4">
         <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
           {/* Background Decoration */}
           <div className="absolute inset-0 opacity-10">
@@ -175,9 +175,9 @@ export default async function BlogPage() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-6 py-4 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="flex-1 px-6 py-3 rounded-lg text-slate-100 ring-2 ring-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
-              <Button className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold px-8 py-4 shadow-xl shadow-amber-500/20 hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-300">
+              <Button className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold px-8 py-4 mt-1">
                 Subscribe
               </Button>
             </div>
