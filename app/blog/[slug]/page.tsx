@@ -1,21 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import Image from "next/image";
+import Link from "next/link";
+import { Metadata } from "next";
+import { Clock, Calendar, ArrowLeft } from "lucide-react";
+
+import imageUrlBuilder from "@sanity/image-url";
 import { baseClient } from "@/lib/sanity";
 import { PortableText } from "@portabletext/react";
-import { PortableTextComponents } from "@/components/PortableTextComponents";
-import { ReadingProgressBar } from "@/components/ReadingProgressBar";
 import {
   TableOfContents,
   MobileTableOfContents,
 } from "@/components/TableOfContents";
-// import { ScrollToTopButton } from "@/components/ScrollToTopButton";
-import imageUrlBuilder from "@sanity/image-url";
+import {
+  SocialShareButtons,
+  FloatingSocialShare,
+} from "@/components/SocialShareButtons";
+import { PortableTextComponents } from "@/components/PortableTextComponents";
+import { ReadingProgressBar } from "@/components/ReadingProgressBar";
+import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { ProductCard } from "@/components/ProductCard";
-import { Metadata } from "next";
-import { Clock, Calendar, ArrowLeft, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 const builder = imageUrlBuilder(baseClient);
 function urlFor(source: any) {
@@ -103,6 +108,9 @@ export default async function BlogPostPage({ params }: Props) {
     day: "numeric",
   });
 
+  // Get current URL for sharing
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white">
       {/* Reading Progress Bar */}
@@ -110,6 +118,16 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Table of Contents - Desktop (Fixed Position) */}
       <TableOfContents />
+
+      {/* Floating Social Share - Desktop (Left Side) */}
+      <FloatingSocialShare
+        url={currentUrl}
+        title={post.title}
+        description={post.excerpt}
+      />
+
+      {/* Scroll to Top Button */}
+      <ScrollToTopButton />
 
       {/* Back Button */}
       <div className="container mx-auto px-4 pt-8">
@@ -171,7 +189,7 @@ export default async function BlogPostPage({ params }: Props) {
               <span>{post.readTime} min read</span>
             </div>
           )}
-
+          {/* 
           <Button
             variant="outline"
             size="sm"
@@ -179,7 +197,7 @@ export default async function BlogPostPage({ params }: Props) {
           >
             <Share2 className="w-4 h-4 mr-2" />
             Share
-          </Button>
+          </Button> */}
         </div>
 
         {/* Featured Image */}
@@ -225,6 +243,15 @@ export default async function BlogPostPage({ params }: Props) {
         >
           <PortableText value={post.body} components={PortableTextComponents} />
         </div>
+
+        {/* Social Share Section */}
+        <div className="mt-16 pt-12 border-t-2 border-slate-200">
+          <SocialShareButtons
+            url={currentUrl}
+            title={post.title}
+            description={post.excerpt}
+          />
+        </div>
       </article>
 
       {/* Products Section */}
@@ -244,12 +271,12 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {post.products.map((product: Product) => (
+              {post.products.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
             </div>
 
-            <div className="mt-8 -mb-8 p-4 bg-amber-50 border border-amber-200 rounded-lg text-center">
+            <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-lg text-center">
               <p className="text-sm text-slate-600">
                 <strong className="text-slate-900">
                   Affiliate Disclosure:
@@ -263,7 +290,7 @@ export default async function BlogPostPage({ params }: Props) {
       )}
 
       {/* Newsletter CTA */}
-      <section className="container mx-auto px-4 py-4 max-w-4xl">
+      <section className="container mx-auto px-4 py-16 max-w-4xl">
         <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-1/4 w-64 h-64 bg-amber-500 rounded-full blur-3xl"></div>
