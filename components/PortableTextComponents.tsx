@@ -10,36 +10,36 @@ export const PortableTextComponents = {
   block: {
     // Headings
     h1: ({ children }: any) => (
-      <h1 className="text-5xl font-bold text-slate-900 mt-16 mb-8 leading-tight tracking-tight">
+      <h1 className="text-5xl font-bold text-slate-900 dark:text-white mt-16 mb-8 leading-tight tracking-tight">
         {children}
       </h1>
     ),
     h2: ({ children }: any) => (
-      <h2 className="text-4xl font-bold text-slate-900 mt-16 mb-8 border-l-4 border-amber-500 pl-6 leading-tight tracking-tight">
+      <h2 className="text-4xl font-bold text-slate-900 dark:text-white mt-16 mb-8 border-l-4 border-amber-500 pl-6 leading-tight tracking-tight">
         {children}
       </h2>
     ),
     h3: ({ children }: any) => (
-      <h3 className="text-3xl font-bold text-slate-900 mt-12 mb-6 leading-snug">
+      <h3 className="text-3xl font-bold text-slate-900 dark:text-white mt-12 mb-6 leading-snug">
         {children}
       </h3>
     ),
     h4: ({ children }: any) => (
-      <h4 className="text-2xl font-bold text-slate-900 mt-8 mb-4">
+      <h4 className="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-4">
         {children}
       </h4>
     ),
 
     // Normal paragraph
     normal: ({ children }: any) => (
-      <p className="text-slate-700 text-lg leading-[1.9] mb-8 tracking-normal">
+      <p className="text-slate-700 dark:text-slate-300 text-lg leading-[1.9] mb-8 tracking-normal">
         {children}
       </p>
     ),
 
     // Blockquote
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-amber-500 bg-amber-50 py-6 px-8 rounded-r-lg my-10 text-lg leading-relaxed italic text-slate-700">
+      <blockquote className="border-l-4 border-amber-500 bg-amber-50 py-6 px-8 rounded-r-lg my-10 text-lg leading-relaxed italic text-slate-700 dark:text-slate-300">
         {children}
       </blockquote>
     ),
@@ -60,12 +60,12 @@ export const PortableTextComponents = {
 
   listItem: {
     bullet: ({ children }: any) => (
-      <li className="text-slate-700 text-lg leading-[1.9] pl-2 marker:text-amber-600 marker:font-bold">
+      <li className="text-slate-700 dark:text-slate-300 text-lg leading-[1.9] pl-2 marker:text-amber-600 marker:font-bold">
         {children}
       </li>
     ),
     number: ({ children }: any) => (
-      <li className="text-slate-700 text-lg leading-[1.9] pl-2 marker:text-amber-600 marker:font-bold">
+      <li className="text-slate-700 dark:text-slate-300 text-lg leading-[1.9] pl-2 marker:text-amber-600 marker:font-bold">
         {children}
       </li>
     ),
@@ -74,11 +74,13 @@ export const PortableTextComponents = {
   marks: {
     // Strong/bold
     strong: ({ children }: any) => (
-      <strong className="text-slate-900 font-bold">{children}</strong>
+      <strong className="text-slate-900 dark:text-white font-bold">
+        {children}
+      </strong>
     ),
     // Emphasis/italic
     em: ({ children }: any) => (
-      <em className="text-slate-800 italic">{children}</em>
+      <em className="text-slate-800 dark:text-slate-300 italic">{children}</em>
     ),
     // Link
     link: ({ value, children }: any) => {

@@ -26,7 +26,7 @@ export default async function HomePage() {
   const posts = await getLatestPosts();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
       {/* Hero Section - Deep Navy Background with Orange Accents */}
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         {/* Animated Background Pattern */}
@@ -35,10 +35,10 @@ export default async function HomePage() {
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
 
-        <div className="container mx-auto px-4 py-14 md:py-32 relative z-10">
+        <div className="container mx-auto px-4 py-24 md:py-32 relative z-10">
           <div className="text-center space-y-6 max-w-4xl mx-auto">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-400 text-sm font-medium backdrop-blur-sm -mt-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-400 text-sm font-medium backdrop-blur-sm">
               <Sparkles className="w-4 h-4" />
               <span>Your Trusted Home Improvement Guide</span>
             </div>
@@ -73,7 +73,7 @@ export default async function HomePage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-2 border-slate-600 text-slate-800 hover:bg-slate-800 hover:text-white px-8 py-6 text-lg backdrop-blur-sm transition-all duration-300"
+                className="border-2 border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white px-8 py-6 text-lg backdrop-blur-sm transition-all duration-300"
               >
                 <Link href="/about">Learn More</Link>
               </Button>
@@ -135,7 +135,7 @@ export default async function HomePage() {
       </section>
 
       {/* Latest Posts Section */}
-      <section className="py-4 container mx-auto px-4 bg-gradient-to-b from-white to-slate-50">
+      <section className="py-16 container mx-auto px-4 bg-gradient-to-b from-white to-slate-50">
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
             Latest{" "}

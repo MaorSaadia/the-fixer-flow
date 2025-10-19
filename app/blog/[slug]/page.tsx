@@ -89,7 +89,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-slate-900 mb-4">
             Post not found
@@ -112,7 +112,7 @@ export default async function BlogPostPage({ params }: Props) {
   const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       {/* Reading Progress Bar */}
       <ReadingProgressBar />
 
@@ -134,7 +134,7 @@ export default async function BlogPostPage({ params }: Props) {
         <Button
           asChild
           variant="ghost"
-          className="mb-4 text-slate-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300"
+          className="mb-4 text-slate-600 dark:text-slate-300 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300"
         >
           <Link href="/blog" className="flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" />
@@ -154,12 +154,12 @@ export default async function BlogPostPage({ params }: Props) {
         )}
 
         {/* Title */}
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-slate-900 leading-tight">
+        <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-slate-900 dark:text-slate-100 leading-tight">
           {post.title}
         </h1>
 
         {/* Meta Information */}
-        <div className="flex flex-wrap items-center gap-6 mb-8 text-slate-600">
+        <div className="flex flex-wrap items-center gap-6 mb-8 text-slate-600 dark:text-slate-200">
           {post.author && (
             <div className="flex items-center gap-3">
               {post.author.image && (
@@ -245,13 +245,13 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* Social Share Section */}
-        <div className="mt-16 pt-12 border-t-2 border-slate-200">
+        {/* <div className="mt-16 pt-12 border-t-2 border-slate-200">
           <SocialShareButtons
             url={currentUrl}
             title={post.title}
             description={post.excerpt}
           />
-        </div>
+        </div> */}
       </article>
 
       {/* Products Section */}

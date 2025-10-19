@@ -13,6 +13,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
+import { DarkModeToggle } from "@/components/DarkModeToggle";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -30,7 +31,7 @@ export function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200 shadow-sm"
+      className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700 shadow-sm"
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16 md:h-20">
@@ -44,8 +45,9 @@ export function Header() {
               <Wrench className="w-5 h-5 text-white" />
             </motion.div>
             <div className="flex flex-col">
-              <span className="font-bold text-xl text-slate-900 group-hover:text-amber-600 transition-colors duration-300">
-                The Fixer <span className="text-amber-600">Flow</span>
+              <span className="font-bold text-xl text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors duration-300">
+                The Fixer{" "}
+                <span className="text-amber-600 dark:text-amber-500">Flow</span>
               </span>
             </div>
           </Link>
@@ -59,8 +61,8 @@ export function Header() {
                     <NavigationMenuLink
                       className={`${navigationMenuTriggerStyle()} relative font-semibold transition-colors duration-300 ${
                         isActive(item.href)
-                          ? "text-amber-600"
-                          : "text-slate-700 hover:text-amber-600"
+                          ? "text-amber-600 dark:text-amber-500"
+                          : "text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-500"
                       }`}
                     >
                       {item.label}
@@ -75,6 +77,12 @@ export function Header() {
                   </Link>
                 </NavigationMenuItem>
               ))}
+
+              {/* Dark Mode Toggle */}
+              <NavigationMenuItem>
+                <DarkModeToggle />
+              </NavigationMenuItem>
+
               <NavigationMenuItem>
                 <Button
                   asChild
@@ -87,17 +95,20 @@ export function Header() {
           </NavigationMenu>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors duration-300"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-slate-900" />
-            ) : (
-              <Menu className="w-6 h-6 text-slate-900" />
-            )}
-          </button>
+          <div className="md:hidden flex items-center gap-3">
+            <DarkModeToggle />
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-300"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6 text-slate-900 dark:text-white" />
+              ) : (
+                <Menu className="w-6 h-6 text-slate-900 dark:text-white" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
