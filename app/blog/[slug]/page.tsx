@@ -12,10 +12,10 @@ import {
   TableOfContents,
   MobileTableOfContents,
 } from "@/components/TableOfContents";
-import {
-  SocialShareButtons,
-  FloatingSocialShare,
-} from "@/components/SocialShareButtons";
+// import {
+//   SocialShareButtons,
+//   FloatingSocialShare,
+// } from "@/components/SocialShareButtons";
 import { PortableTextComponents } from "@/components/PortableTextComponents";
 import { ReadingProgressBar } from "@/components/ReadingProgressBar";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
@@ -109,7 +109,7 @@ export default async function BlogPostPage({ params }: Props) {
   });
 
   // Get current URL for sharing
-  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+  // const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
@@ -120,11 +120,11 @@ export default async function BlogPostPage({ params }: Props) {
       <TableOfContents />
 
       {/* Floating Social Share - Desktop (Left Side) */}
-      <FloatingSocialShare
+      {/* <FloatingSocialShare
         url={currentUrl}
         title={post.title}
         description={post.excerpt}
-      />
+      /> */}
 
       {/* Scroll to Top Button */}
       <ScrollToTopButton />
@@ -256,16 +256,16 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Products Section */}
       {post.products?.length > 0 && (
-        <section className="bg-gradient-to-br from-slate-50 to-white py-16 mt-12 border-t border-slate-200">
+        <section className="bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 py-16 mt-12 border-t border-slate-200 dark:border-slate-700">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-slate-900 mb-4">
+              <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4">
                 Recommended{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">
                   Products
                 </span>
               </h2>
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
                 Carefully selected products mentioned in this guide
               </p>
             </div>

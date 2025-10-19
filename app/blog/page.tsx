@@ -67,7 +67,7 @@ export default async function BlogPage() {
           >
             <path
               d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
-              fill="white"
+              className="fill-slate-50 dark:fill-slate-900"
             />
           </svg>
         </div>
@@ -75,7 +75,7 @@ export default async function BlogPage() {
 
       {/* Search & Filter Bar */}
       <section className="container mx-auto px-4 -mt-8 relative z-20">
-        <div className="bg-white rounded-xl shadow-xl border border-slate-200 p-4 md:p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 p-4 md:p-6">
           <div className="flex flex-col md:flex-row gap-4 items-center">
             {/* Search Input */}
             <div className="flex-1 relative w-full">
@@ -130,14 +130,14 @@ export default async function BlogPage() {
         ) : (
           <>
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-bold text-slate-900">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                 All Articles{" "}
-                <span className="text-slate-500 font-normal">
+                <span className="text-slate-500 font-normal dark:text-slate-200">
                   ({posts.length})
                 </span>
               </h2>
 
-              <select className="px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm font-medium text-slate-700">
+              <select className="px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm font-medium text-slate-700 dark:text-slate-400">
                 <option>Latest First</option>
                 <option>Oldest First</option>
                 <option>Most Popular</option>

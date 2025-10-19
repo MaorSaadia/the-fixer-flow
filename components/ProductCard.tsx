@@ -36,9 +36,9 @@ export function ProductCard({ product }: Props) {
       transition={{ duration: 0.5 }}
       whileHover={{ y: -4 }}
     >
-      <Card className="h-full flex flex-col overflow-hidden border-slate-200 hover:border-amber-500 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-500 bg-white group">
+      <Card className="h-full flex flex-col overflow-hidden border-slate-200 dark:border-slate-700 hover:border-amber-500 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-500 bg-white dark:bg-slate-900 group">
         {/* Product Image */}
-        <div className="relative w-full h-64 bg-slate-100 overflow-hidden">
+        <div className="relative w-full h-64 bg-slate-100 dark:bg-slate-800 overflow-hidden">
           <Image
             src={imageUrl}
             alt={product.productName}
@@ -78,7 +78,7 @@ export function ProductCard({ product }: Props) {
 
         {/* Product Info */}
         <CardHeader className="pb-3">
-          <h3 className="text-xl font-bold text-slate-900 group-hover:text-amber-600 transition-colors duration-300 line-clamp-2 leading-tight">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 group-hover:text-amber-600 transition-colors duration-300 line-clamp-2 leading-tight">
             {product.productName}
           </h3>
 

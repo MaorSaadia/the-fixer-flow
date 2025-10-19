@@ -39,7 +39,7 @@ export function PostCard({ post, index = 0 }: Props) {
       whileHover={{ y: -8 }}
     >
       <Link href={`/blog/${post.slug.current}`} className="group block">
-        <Card className="flex flex-col h-full overflow-hidden border-slate-200 hover:border-amber-500 transition-all duration-500 hover:shadow-2xl hover:shadow-amber-500/10 bg-white">
+        <Card className="flex flex-col h-full overflow-hidden border-slate-200 hover:border-amber-500 transition-all duration-500 hover:shadow-2xl hover:shadow-amber-500/10 bg-white dark:bg-slate-800 dark:border-slate-700">
           {/* Image Container with Overlay */}
           <div className="relative w-full h-56 overflow-hidden bg-slate-100">
             {post.mainImage?.asset?.url && (
@@ -89,13 +89,13 @@ export function PostCard({ post, index = 0 }: Props) {
 
           {/* Card Content */}
           <CardHeader className="pb-3">
-            <CardTitle className="text-xl font-bold text-slate-900 group-hover:text-amber-600 transition-colors duration-300 line-clamp-2">
+            <CardTitle className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-amber-600 transition-colors duration-300 line-clamp-2">
               {post.title}
             </CardTitle>
           </CardHeader>
 
           <CardContent className="flex-grow -mt-8 -mb-6">
-            <p className="text-slate-600 line-clamp-3 leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
               {post.excerpt}
             </p>
           </CardContent>

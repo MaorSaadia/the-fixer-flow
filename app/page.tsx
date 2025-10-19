@@ -73,7 +73,7 @@ export default async function HomePage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-2 border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white px-8 py-6 text-lg backdrop-blur-sm transition-all duration-300"
+                className="border-2 border-slate-600 text-slate-900 dark:text-slate-100 hover:bg-slate-800 hover:text-white px-8 py-6 text-lg backdrop-blur-sm transition-all duration-300"
               >
                 <Link href="/about">Learn More</Link>
               </Button>
@@ -91,7 +91,7 @@ export default async function HomePage() {
           >
             <path
               d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"
-              fill="rgb(248, 250, 252)"
+              className="fill-slate-50 dark:fill-slate-950"
             />
           </svg>
         </div>
@@ -100,34 +100,38 @@ export default async function HomePage() {
       {/* Features Section */}
       <section className="py-16 container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div className="text-center space-y-3 p-6 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div className="text-center space-y-3 p-6 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center mx-auto">
               <Wrench className="w-7 h-7 text-white" />
             </div>
-            <h3 className="text-xl font-bold text-slate-900">Expert Reviews</h3>
-            <p className="text-slate-600">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+              Expert Reviews
+            </h3>
+            <p className="text-slate-600 dark:text-slate-300">
               In-depth product analysis and honest recommendations
             </p>
           </div>
 
-          <div className="text-center space-y-3 p-6 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div className="text-center space-y-3 p-6 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center mx-auto">
               <Sparkles className="w-7 h-7 text-white" />
             </div>
-            <h3 className="text-xl font-bold text-slate-900">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
               Smart Solutions
             </h3>
-            <p className="text-slate-600">
+            <p className="text-slate-600 dark:text-slate-300">
               Practical fixes that save time and money
             </p>
           </div>
 
-          <div className="text-center space-y-3 p-6 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+          <div className="text-center space-y-3 p-6 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center mx-auto">
               <TrendingUp className="w-7 h-7 text-white" />
             </div>
-            <h3 className="text-xl font-bold text-slate-900">Trending Tips</h3>
-            <p className="text-slate-600">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+              Trending Tips
+            </h3>
+            <p className="text-slate-600 dark:text-slate-300">
               Stay updated with the latest home improvement trends
             </p>
           </div>
@@ -135,15 +139,15 @@ export default async function HomePage() {
       </section>
 
       {/* Latest Posts Section */}
-      <section className="py-16 container mx-auto px-4 bg-gradient-to-b from-white to-slate-50">
+      <section className="py-16 container mx-auto px-4 bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-950">
         <div className="text-center space-y-4 mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100">
             Latest{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">
               Solutions
             </span>
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
             Discover our newest guides to help you create the perfect home
             environment
           </p>
@@ -161,7 +165,7 @@ export default async function HomePage() {
             asChild
             size="lg"
             variant="outline"
-            className="border-2 border-slate-300 text-slate-700 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50 font-semibold px-8 transition-all duration-300"
+            className="border-2 border-slate-300 text-slate-700 dark:text-slate-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50 font-semibold px-8 transition-all duration-300"
           >
             <Link href="/blog">View All Articles</Link>
           </Button>

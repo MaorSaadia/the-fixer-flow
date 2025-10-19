@@ -83,7 +83,7 @@ export function TableOfContents() {
       transition={{ duration: 0.5, delay: 0.3 }}
       className="hidden xl:block fixed right-8 top-32 w-72 z-30"
     >
-      <div className="bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 overflow-hidden">
         {/* Header */}
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -237,7 +237,7 @@ export function MobileTableOfContents() {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="mt-4 p-4 bg-white rounded-xl border border-slate-200">
+            <div className="mt-4 p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200">
               <ul className="space-y-1">
                 {headings.map((heading) => (
                   <li key={heading.id}>
@@ -246,7 +246,7 @@ export function MobileTableOfContents() {
                       className={`
                         w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-300
                         ${heading.level === 3 ? "pl-6" : "pl-3"}
-                        text-slate-600 hover:bg-amber-50 hover:text-amber-700 border-l-4 border-transparent hover:border-amber-600
+                        text-slate-600 dark:text-slate-300 hover:bg-amber-50 hover:text-amber-700 dark:hover:bg-amber-950 border-l-4 border-transparent hover:border-amber-600
                       `}
                     >
                       <span className="line-clamp-2 leading-snug">

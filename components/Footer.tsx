@@ -25,7 +25,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative mt-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <footer className="relative mt-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       {/* Top Wave Divider */}
       <div className="absolute top-0 left-0 right-0 transform -translate-y-full">
         <svg
