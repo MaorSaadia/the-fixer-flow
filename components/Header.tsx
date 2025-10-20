@@ -19,10 +19,8 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // ✅ ADD THE "CATEGORIES" LINK HERE
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/blog", label: "Blog" },
     { href: "/categories", label: "Categories" },
   ];
 
