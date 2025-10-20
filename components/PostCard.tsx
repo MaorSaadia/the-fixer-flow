@@ -13,17 +13,21 @@ export interface Post {
   slug: {
     current: string;
   };
+
   mainImage: {
     asset: {
       url: string;
     };
   };
   excerpt: string;
+  publishedAt: string;
+  category?: string;
 }
 
 interface Props {
   post: Post;
   index?: number;
+  viewMode: string;
 }
 
 export function PostCard({ post, index = 0 }: Props) {
@@ -45,6 +49,7 @@ export function PostCard({ post, index = 0 }: Props) {
             {post.mainImage?.asset?.url && (
               <>
                 <motion.div
+                  className="w-full h-full"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 >
@@ -94,7 +99,7 @@ export function PostCard({ post, index = 0 }: Props) {
             </CardTitle>
           </CardHeader>
 
-          <CardContent className="flex-grow -mt-8 -mb-6">
+          <CardContent className="flex-grow">
             <p className="text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
               {post.excerpt}
             </p>
@@ -102,7 +107,7 @@ export function PostCard({ post, index = 0 }: Props) {
 
           {/* Bottom Border Animation */}
           <motion.div
-            className="h-1 bg-gradient-to-r from-amber-500 to-orange-600"
+            className="h-1 bg-gradient-to-r from-amber-500 to-orange-600 mt-auto"
             initial={{ scaleX: 0 }}
             whileHover={{ scaleX: 1 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
