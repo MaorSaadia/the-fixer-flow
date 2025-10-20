@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { ExternalLink, ShoppingCart, Star } from "lucide-react";
+import { motion } from "framer-motion";
+
+import imageUrlBuilder from "@sanity/image-url";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import imageUrlBuilder from "@sanity/image-url";
 import { baseClient } from "@/lib/sanity";
 
 const builder = imageUrlBuilder(baseClient);
