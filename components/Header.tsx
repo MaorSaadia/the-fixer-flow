@@ -19,9 +19,11 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  // ✅ ADD THE "CATEGORIES" LINK HERE
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/blog", label: "Blog" },
+    { href: "/categories", label: "Categories" },
   ];
 
   const isActive = (path: string) => pathname === path;
@@ -119,7 +121,7 @@ export function Header() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden border-t border-slate-200"
+              className="md:hidden overflow-hidden border-t border-slate-200 dark:border-slate-700"
             >
               <nav className="py-4 space-y-1">
                 {navItems.map((item) => (
@@ -130,7 +132,7 @@ export function Header() {
                     className={`block px-4 py-3 rounded-lg font-semibold transition-all duration-300 ${
                       isActive(item.href)
                         ? "bg-amber-50 text-amber-600 border-l-4 border-amber-600"
-                        : "text-slate-700 hover:bg-slate-50 hover:text-amber-600"
+                        : "text-slate-700 dark:text-slate-200 hover:bg-slate-50 hover:text-amber-600"
                     }`}
                   >
                     {item.label}

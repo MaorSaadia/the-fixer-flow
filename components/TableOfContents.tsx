@@ -83,22 +83,24 @@ export function TableOfContents() {
       transition={{ duration: 0.5, delay: 0.3 }}
       className="hidden xl:block fixed right-8 top-32 w-72 z-30"
     >
-      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
         {/* Header */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-slate-50 to-white hover:from-slate-100 hover:to-slate-50 transition-colors duration-300 border-b border-slate-200"
+          className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-slate-50 to-white hover:from-slate-100 hover:to-slate-50 dark:bg-slate-800 dark:from-slate-800 dark:to-slate-800 dark:hover:from-slate-800 dark:hover:to-slate-800 transition-colors duration-300 border-b border-slate-200 dark:border-slate-700"
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center">
               <List className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-slate-900">Table of Contents</span>
+            <span className="font-bold text-slate-900 dark:text-slate-100">
+              Table of Contents
+            </span>
           </div>
           {isOpen ? (
-            <ChevronUp className="w-5 h-5 text-slate-600" />
+            <ChevronUp className="w-5 h-5 text-slate-600 dark:text-slate-300" />
           ) : (
-            <ChevronDown className="w-5 h-5 text-slate-600" />
+            <ChevronDown className="w-5 h-5 text-slate-600 dark:text-slate-300" />
           )}
         </button>
 
@@ -128,8 +130,8 @@ export function TableOfContents() {
                           ${heading.level === 3 ? "pl-6" : "pl-3"}
                           ${
                             activeId === heading.id
-                              ? "bg-amber-50 text-amber-700 font-semibold border-l-4 border-amber-600"
-                              : "text-slate-600 hover:bg-slate-50 hover:text-slate-900 border-l-4 border-transparent"
+                              ? "bg-amber-50 text-amber-700 font-semibold border-l-4 border-amber-600 dark:bg-amber-950 dark:text-amber-500 dark:border-amber-500"
+                              : "text-slate-600 hover:bg-slate-50 hover:text-slate-900 border-l-4 border-transparent dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white dark:border-transparent dark:hover:border-amber-500"
                           }
                         `}
                       >
@@ -237,7 +239,7 @@ export function MobileTableOfContents() {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="mt-4 p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200">
+            <div className="mt-4 p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
               <ul className="space-y-1">
                 {headings.map((heading) => (
                   <li key={heading.id}>
