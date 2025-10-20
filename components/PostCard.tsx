@@ -27,7 +27,7 @@ export interface Post {
 interface Props {
   post: Post;
   index?: number;
-  viewMode: string;
+  viewMode?: string;
 }
 
 export function PostCard({ post, index = 0 }: Props) {
