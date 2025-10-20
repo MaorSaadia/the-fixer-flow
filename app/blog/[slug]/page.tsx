@@ -61,7 +61,7 @@ async function getPost(slug: string) {
     publishedAt,
     "author": author->{name, image},
     "category": categories[0]->title,
-    "readTime": round(length(pt::text(body)) / 250),
+    "readTime": round(length(pt::text(body)) / 365),
     "products": products[]->{
       _id,
       productName,

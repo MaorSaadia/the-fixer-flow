@@ -1,5 +1,3 @@
-// app/categories/page.tsx
-
 import Link from "next/link";
 import { baseClient } from "@/lib/sanity";
 import { CategoryCard } from "@/components/CategoryCard";

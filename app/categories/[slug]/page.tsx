@@ -1,5 +1,3 @@
-// app/categories/[slug]/page.tsx
-
 import { baseClient } from "@/lib/sanity";
 import { PostCard } from "@/components/PostCard";
 import { Metadata } from "next";
