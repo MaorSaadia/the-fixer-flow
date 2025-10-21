@@ -57,8 +57,9 @@ export function Header() {
             <NavigationMenuList className="gap-2">
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.href}>
-                  <Link href={item.href} legacyBehavior passHref>
-                    <NavigationMenuLink
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href={item.href}
                       className={`${navigationMenuTriggerStyle()} relative font-semibold transition-colors duration-300 ${
                         isActive(item.href)
                           ? "text-amber-600 dark:text-amber-500"
@@ -73,8 +74,8 @@ export function Header() {
                           transition={{ duration: 0.3 }}
                         />
                       )}
-                    </NavigationMenuLink>
-                  </Link>
+                    </Link>
+                  </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
 
