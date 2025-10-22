@@ -107,19 +107,18 @@ export const PortableTextComponents = {
   },
 
   types: {
-    // Image
     image: ({ value }: any) => {
       if (!value?.asset?._ref) {
         return null;
       }
       return (
-        <div className="my-6">
+        <div className="my-6 max-w-2xl mx-auto">
           <Image
             src={builder.image(value).url()}
             alt={value.alt || "Article image"}
-            width={1200}
-            height={800}
-            className="rounded-xl shadow-lg w-full"
+            width={600}
+            height={400}
+            className="rounded-xl w-full h-auto max-h-136"
           />
           {value.caption && (
             <p className="text-center text-sm text-slate-500 mt-2 italic">
