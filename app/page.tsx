@@ -3,6 +3,46 @@ import { baseClient } from "@/lib/sanity";
 import { PostCard, Post } from "@/components/PostCard";
 import { Button } from "@/components/ui/button";
 import { Wrench, Sparkles, TrendingUp } from "lucide-react";
+import { Metadata } from "next";
+
+const baseUrl =
+  process.env.NEXT_PUBLIC_BASE_URL || "https://the-fixer-flow.vercel.app";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description:
+    "Discover expert home improvement tips, product reviews, and practical solutions. From kitchen gadgets to smart home tech, get the best advice for a smoother, more efficient home.",
+
+  openGraph: {
+    title: "The Fixer Flow - Expert Home Improvement Solutions & Reviews",
+    description:
+      "Discover expert home improvement tips, product reviews, and practical solutions for a smoother, more efficient home.",
+    url: baseUrl,
+    siteName: "The Fixer Flow",
+    images: [
+      {
+        url: `${baseUrl}/og-home.jpg`,
+        width: 1200,
+        height: 630,
+        alt: "The Fixer Flow Homepage",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "The Fixer Flow - Expert Home Improvement Solutions",
+    description:
+      "Discover expert tips, honest reviews, and practical solutions for your home.",
+    images: [`${baseUrl}/twitter-home.jpg`],
+  },
+
+  alternates: {
+    canonical: baseUrl,
+  },
+};
 
 // This function fetches our 3 latest posts
 async function getLatestPosts() {
@@ -21,7 +61,6 @@ async function getLatestPosts() {
   const posts = await baseClient.fetch<Post[]>(query);
   return posts;
 }
-
 export default async function HomePage() {
   const posts = await getLatestPosts();
 

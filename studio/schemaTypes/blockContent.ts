@@ -1,5 +1,3 @@
-// studio/schemaTypes/blockContent.ts
-
 export default {
   title: 'Block Content',
   name: 'blockContent',
@@ -38,9 +36,31 @@ export default {
         ],
       },
     },
+    // ✅ MODIFIED IMAGE TYPE DEFINITION
     {
       type: 'image',
       options: {hotspot: true},
+      fields: [
+        // <-- Add this fields array
+        {
+          name: 'caption',
+          title: 'Caption',
+          type: 'string',
+          options: {
+            isHighlighted: true, // Makes the caption field stand out in the Sanity UI
+          },
+        },
+        {
+          // Optionally add an alt text field too
+          name: 'alt',
+          title: 'Alternative text',
+          type: 'string',
+          description: 'Important for SEO and accessibility.',
+          options: {
+            isHighlighted: true,
+          },
+        },
+      ],
     },
   ],
 }

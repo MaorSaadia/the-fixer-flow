@@ -1,0 +1,54 @@
+{
+  "name": "The Fixer Flow - Home Improvement Solutions",
+  "short_name": "Fixer Flow",
+  "description": "Expert home improvement tips, product reviews, and practical solutions for a smoother home.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#f59e0b",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["lifestyle", "productivity", "home"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.jpg",
+      "sizes": "540x720",
+      "type": "image/jpeg",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot-desktop.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Browse Blog",
+      "url": "/blog",
+      "description": "View all articles"
+    },
+    {
+      "name": "Categories",
+      "url": "/categories",
+      "description": "Browse by category"
+    }
+  ]
+}

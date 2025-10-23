@@ -21,6 +21,10 @@ import { ReadingProgressBar } from "@/components/ReadingProgressBar";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
+import {
+  generateArticleSchema,
+  generateBreadcrumbSchema,
+} from "@/lib/metadata";
 
 const builder = imageUrlBuilder(baseClient);
 function urlFor(source: any) {
@@ -102,6 +106,23 @@ export default async function BlogPostPage({ params }: Props) {
     );
   }
 
+  // Generate structured data
+  const articleSchema = generateArticleSchema({
+    title: post.title,
+    description: post.excerpt,
+    slug,
+    image: post.mainImage ? builder.image(post.mainImage).url() : "",
+    publishedAt: post.publishedAt,
+    // updatedAt: post._updatedAt,
+    author: post.author?.name,
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+    { name: post.title, url: `/blog/${slug}` },
+  ]);
+
   const formattedDate = new Date(post.publishedAt).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -113,6 +134,16 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Reading Progress Bar */}
       <ReadingProgressBar />
 
