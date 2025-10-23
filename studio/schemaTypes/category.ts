@@ -18,6 +18,14 @@ export default {
       },
     },
     {
+      name: 'image',
+      title: 'Category Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
       name: 'description',
       title: 'Description',
       type: 'text',

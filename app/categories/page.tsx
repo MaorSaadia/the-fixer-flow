@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "Browse all content categories on The Fixer Flow - Expert home improvement solutions organized by topic.",
 };
 
-interface Category {
+export interface Category {
   _id: string;
   title: string;
   description: string;
@@ -18,14 +18,25 @@ interface Category {
     current: string;
   };
   postCount: number;
+  image?: {
+    asset: {
+      url: string;
+    };
+  };
 }
 
 async function getCategories() {
+  // ✅ Update query to fetch image and expand asset URL
   const query = `*[_type == "category"] | order(title asc) {
     _id,
     title,
     description,
     slug,
+    image {
+      asset->{
+        url
+      }
+    },
     "postCount": count(*[_type == "post" && references(^._id)])
   }`;
   const categories = await baseClient.fetch<Category[]>(query);
