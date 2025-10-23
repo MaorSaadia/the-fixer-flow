@@ -121,7 +121,7 @@ export const PortableTextComponents = {
             className="rounded-xl w-full h-auto max-h-136"
           />
           {value.caption && (
-            <p className="text-center text-sm text-slate-500 mt-2 italic">
+            <p className="text-center text-sm text-slate-500 dark:text-slate-200 mt-2 italic -mb-2">
               {value.caption}
             </p>
           )}
