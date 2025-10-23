@@ -1,16 +1,21 @@
 "use client";
-
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Wrench, Mail, ArrowUp } from "lucide-react";
 
 export function Footer() {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Try smooth scrolling with fallback
+    try {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (e) {
+      console.log(e);
+      // Fallback for browsers that don't support smooth scrolling
+      window.scrollTo(0, 0);
+    }
   };
 
   const currentYear = new Date().getFullYear();
-
   const footerLinks = {
     explore: [
       { label: "Home", href: "/" },
@@ -40,7 +45,6 @@ export function Footer() {
           />
         </svg>
       </div>
-
       <div className="container mx-auto px-4 pt-16 pb-8">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
@@ -64,7 +68,6 @@ export function Footer() {
               efficient home.
             </p>
           </div>
-
           {/* Explore Column */}
           <div>
             <h3 className="font-bold text-lg mb-4 text-white">Explore</h3>
@@ -82,7 +85,6 @@ export function Footer() {
               ))}
             </ul>
           </div>
-
           {/* Legal Column */}
           <div>
             <h3 className="font-bold text-lg mb-4 text-white">Legal</h3>
@@ -100,7 +102,6 @@ export function Footer() {
               ))}
             </ul>
           </div>
-
           {/* Newsletter Column */}
           <div>
             <h3 className="font-bold text-lg mb-4 text-white">Stay Updated</h3>
@@ -123,25 +124,23 @@ export function Footer() {
             </div>
           </div>
         </div>
-
         {/* Bottom Bar */}
         <div className="border-t border-slate-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-slate-400 text-sm">
             © {currentYear} The Fixer Flow. All rights reserved.
           </p>
-
           {/* Scroll to Top Button */}
           <motion.button
             onClick={scrollToTop}
+            onTouchStart={scrollToTop} // Added for touch support
             whileHover={{ scale: 1.1, y: -2 }}
-            whileTap={{ scale: 0.9 }}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-sm font-medium transition-all duration-300 group"
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 px-4 py-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-sm font-medium transition-all duration-300 group touch-manipulation min-h-[44px] min-w-[44px] z-10"
           >
             Back to Top
-            <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform duration-300" />
+            <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
           </motion.button>
         </div>
-
         {/* Affiliate Disclaimer */}
         <div className="mt-8 pt-6 border-t border-slate-800">
           <p className="text-slate-500 text-xs text-center leading-relaxed max-w-4xl mx-auto">
@@ -151,7 +150,6 @@ export function Footer() {
           </p>
         </div>
       </div>
-
       {/* Decorative Background Elements */}
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl"></div>
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl"></div>
