@@ -39,7 +39,7 @@ export const PortableTextComponents = {
 
     // Blockquote
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-amber-500 bg-amber-50 py-4 px-6 rounded-r-lg my-6 text-lg leading-relaxed italic text-slate-700 dark:text-slate-300">
+      <blockquote className="border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-700 py-4 px-6 rounded-r-lg my-6 text-lg leading-relaxed italic text-slate-700 dark:text-slate-100">
         {children}
       </blockquote>
     ),
