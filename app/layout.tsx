@@ -73,7 +73,7 @@ export const metadata: Metadata = {
       "Discover expert home improvement tips, honest product reviews, and practical solutions for a smoother, more efficient home.",
     images: [
       {
-        url: `${baseUrl}/og-image.png`, // You'll need to create this image
+        url: `${baseUrl}/og-image.png`,
         width: 1200,
         height: 630,
         alt: "The Fixer Flow - Home Improvement Solutions",
