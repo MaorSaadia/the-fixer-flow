@@ -84,7 +84,7 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: "summary_large_image",
-    site: "@thefixerflow", // Update with your Twitter handle
+    site: "@thefixerflow",
     creator: "@thefixerflow",
     title: "The Fixer Flow - Expert Home Improvement Solutions",
     description:
