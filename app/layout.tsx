@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     title: "The Fixer Flow - Expert Home Improvement Solutions",
     description:
       "Discover expert home improvement tips, honest product reviews, and practical solutions for a smoother home.",
-    images: [`${baseUrl}/og-image.png`], // You'll need to create this image
+    images: [`${baseUrl}/og-image.png`],
   },
 
   // Verification (Add when you have accounts)
