@@ -21,8 +21,9 @@ import {
   generateArticleSchema,
   generateBreadcrumbSchema,
 } from "@/lib/metadata";
-import BlogShareButton from "@/components/BlogShareButton";
-// import { FloatingSocialShare } from "@/components/SocialShareButtons";
+import BlogShareButton, {
+  FloatingSocialShare,
+} from "@/components/BlogShareButton";
 
 const builder = imageUrlBuilder(baseClient);
 function urlFor(source: any) {
@@ -151,13 +152,6 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Table of Contents - Desktop (Fixed Position) */}
       <TableOfContents />
 
-      {/* Floating Social Share - Desktop (Left Side) */}
-      {/* <FloatingSocialShare
-        url={currentUrl}
-        title={post.title}
-        description={post.excerpt}
-      /> */}
-
       {/* Scroll to Top Button */}
       <ScrollToTopButton />
 
@@ -222,7 +216,6 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           )}
 
-          {/* Share Button - Pushed to the right */}
           <div className="ml-auto">
             <BlogShareButton
               url={currentUrl}
@@ -232,6 +225,14 @@ export default async function BlogPostPage({ params }: Props) {
               category={post.category}
             />
           </div>
+
+          <FloatingSocialShare
+            url={currentUrl}
+            title={post.title}
+            excerpt={post.excerpt}
+            image={imageUrl}
+            category={post.category}
+          />
         </div>
         {/* Featured Image */}
         {post.mainImage && (
@@ -276,15 +277,6 @@ export default async function BlogPostPage({ params }: Props) {
         >
           <PortableText value={post.body} components={PortableTextComponents} />
         </div>
-
-        {/* Social Share Section */}
-        {/* <div className="mt-16 pt-12 border-t-2 border-slate-200">
-          <SocialShareButtons
-            url={currentUrl}
-            title={post.title}
-            description={post.excerpt}
-          />
-        </div> */}
       </article>
 
       {/* Products Section */}

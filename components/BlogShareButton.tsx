@@ -1,6 +1,7 @@
 "use client";
 
 import { Share2 } from "lucide-react";
+import { useState } from "react";
 import {
   Popover,
   PopoverContent,
@@ -28,7 +29,7 @@ const BlogShareButton: React.FC<BlogShareButtonProps> = ({
   const shareMessage = `📖 ${title}\n\n${excerpt}\n\n${categoryTag ? `${categoryTag} ` : ""}Read more: ${url}`;
 
   const shareUrls = {
-    native: undefined,
+    native: "",
     whatsapp: `https://wa.me/?text=${encodeURIComponent(shareMessage)}`,
     telegram: `https://t.me/share/url?url=${encodeURIComponent(
       url
@@ -134,6 +135,140 @@ const BlogShareButton: React.FC<BlogShareButtonProps> = ({
         </div>
       </PopoverContent>
     </Popover>
+  );
+};
+
+// Floating Share Bar (Sticky on left side)
+export const FloatingSocialShare: React.FC<BlogShareButtonProps> = ({
+  url,
+  title,
+  excerpt,
+  image,
+  category,
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const categoryTag = category ? `#${category.replace(/\s+/g, "")}` : "";
+
+  const shareMessage = `📖 ${title}\n\n${excerpt}\n\n${categoryTag ? `${categoryTag} ` : ""}Read more: ${url}`;
+
+  const shareUrls = {
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      url
+    )}`,
+    x: `https://x.com/intent/tweet?url=${encodeURIComponent(
+      url
+    )}&text=${encodeURIComponent(`📖 ${title}\n\n${categoryTag}`)}`,
+    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+      url
+    )}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(
+      excerpt
+    )}`,
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(shareMessage)}`,
+    telegram: `https://t.me/share/url?url=${encodeURIComponent(
+      url
+    )}&text=${encodeURIComponent(shareMessage)}`,
+    pinterest: image
+      ? `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
+          url
+        )}&media=${encodeURIComponent(image)}&description=${encodeURIComponent(
+          shareMessage
+        )}`
+      : undefined,
+  };
+
+  const handleShare = (platform: keyof typeof shareUrls) => {
+    if (shareUrls[platform]) {
+      window.open(shareUrls[platform], "_blank", "width=600,height=400");
+    }
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
+
+  // Show/hide based on scroll
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", () => {
+      setIsVisible(window.scrollY > 600);
+    });
+  }
+
+  const socialIcons: {
+    name: string;
+    platform:
+      | "facebook"
+      | "x"
+      | "linkedin"
+      | "whatsapp"
+      | "telegram"
+      | "pinterest";
+  }[] = [
+    { name: "facebook", platform: "facebook" },
+    { name: "x", platform: "x" },
+    { name: "linkedin", platform: "linkedin" },
+    { name: "whatsapp", platform: "whatsapp" },
+    { name: "telegram", platform: "telegram" },
+  ];
+
+  if (image) {
+    socialIcons.push({ name: "pinterest", platform: "pinterest" as const });
+  }
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="hidden lg:flex fixed left-8 top-1/2 -translate-y-1/2 z-30 flex-col gap-3">
+      {socialIcons.map((social, index) => (
+        <button
+          key={social.platform}
+          onClick={() => handleShare(social.platform)}
+          className="w-12 h-12 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-slate-600 shadow-lg hover:bg-amber-50 hover:border-amber-500 hover:text-amber-600 transition-all duration-300 hover:shadow-xl hover:scale-110"
+          title={`Share on ${social.name === "x" ? "X (Twitter)" : social.name}`}
+          style={{
+            animation: `fadeInLeft 0.3s ease-out ${index * 0.1}s both`,
+          }}
+        >
+          <ShareIcon platform={social.platform} />
+        </button>
+      ))}
+
+      {/* Copy Link */}
+      <button
+        onClick={copyToClipboard}
+        className={`w-12 h-12 rounded-full border-2 flex items-center justify-center shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-110 ${
+          copied
+            ? "bg-green-500 border-green-500 text-white"
+            : "bg-white border-slate-200 text-slate-600 hover:bg-amber-50 hover:border-amber-500 hover:text-amber-600"
+        }`}
+        title={copied ? "Copied!" : "Copy link"}
+        style={{
+          animation: `fadeInLeft 0.3s ease-out ${socialIcons.length * 0.1}s both`,
+        }}
+      >
+        {copied ? "✓" : "🔗"}
+      </button>
+
+      <style jsx>{`
+        @keyframes fadeInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+      `}</style>
+    </div>
   );
 };
 
