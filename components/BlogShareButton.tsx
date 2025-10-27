@@ -24,7 +24,7 @@ const BlogShareButton: React.FC<BlogShareButtonProps> = ({
   image,
   category,
 }) => {
-  const categoryTag = category ? `#${category.replace(/\s+/g, "")}` : "";
+  const categoryTag = category ? `${category.replace(/\s+/g, "")}` : "";
 
   const shareMessage = `📖 ${title}\n\n${excerpt}\n\n${categoryTag ? `${categoryTag} ` : ""}Read more: ${url}`;
 

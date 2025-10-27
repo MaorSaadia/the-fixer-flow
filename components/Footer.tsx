@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Wrench, Mail, ArrowUp } from "lucide-react";
+import { Wrench, ArrowUp } from "lucide-react";
 
 export function Footer() {
   const scrollToTop = () => {
@@ -47,7 +47,7 @@ export function Footer() {
       </div>
       <div className="container mx-auto px-4 pt-16 pb-8">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand Column */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 group">
@@ -87,7 +87,7 @@ export function Footer() {
           </div>
           {/* Legal Column */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-white">Legal</h3>
+            <h3 className="font-bold text-lg mb-2 text-white">Legal</h3>
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.href}>
@@ -103,7 +103,7 @@ export function Footer() {
             </ul>
           </div>
           {/* Newsletter Column */}
-          <div>
+          {/* <div>
             <h3 className="font-bold text-lg mb-4 text-white">Stay Updated</h3>
             <p className="text-slate-400 text-sm mb-4">
               Get the latest tips and product recommendations.
@@ -122,10 +122,10 @@ export function Footer() {
                 <Mail className="w-5 h-5" />
               </motion.button>
             </div>
-          </div>
+          </div> */}
         </div>
         {/* Bottom Bar */}
-        <div className="border-t border-slate-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-slate-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-slate-400 text-sm">
             © {currentYear} The Fixer Flow. All rights reserved.
           </p>
@@ -142,7 +142,7 @@ export function Footer() {
           </motion.button>
         </div>
         {/* Affiliate Disclaimer */}
-        <div className="mt-8 pt-6 border-t border-slate-800">
+        <div className="mt-2 pt-4 border-t border-slate-800">
           <p className="text-slate-500 text-xs text-center leading-relaxed max-w-4xl mx-auto">
             As AliExpress affiliate, we earn from qualifying purchases. This
             means we may receive a commission on purchases made through links on

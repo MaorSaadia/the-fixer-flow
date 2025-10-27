@@ -100,7 +100,7 @@ export function PostCard({ post, index = 0 }: Props) {
           </CardHeader>
 
           <CardContent className="flex-grow">
-            <p className="text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 line-clamp-4 leading-relaxed -mb-6 -mt-6">
               {post.excerpt}
             </p>
           </CardContent>

@@ -3,7 +3,6 @@
 import { useState, useMemo } from "react";
 import { PostCard, Post } from "@/components/PostCard";
 import { BlogControls } from "@/components/BlogControls";
-import { Button } from "@/components/ui/button";
 
 interface BlogLayoutProps {
   initialPosts: Post[];
@@ -117,7 +116,7 @@ export function BlogLayout({ initialPosts }: BlogLayoutProps) {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="container mx-auto px-4 py-4">
+      {/* <section className="container mx-auto px-4 py-4">
         <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-1/4 w-64 h-64 bg-amber-500 rounded-full blur-3xl"></div>
@@ -145,7 +144,7 @@ export function BlogLayout({ initialPosts }: BlogLayoutProps) {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

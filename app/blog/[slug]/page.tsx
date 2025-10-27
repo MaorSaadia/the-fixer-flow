@@ -273,6 +273,7 @@ export default async function BlogPostPage({ params }: Props) {
           prose-code:bg-slate-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-amber-600 prose-code:font-mono prose-code:text-base prose-code:font-medium
           prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:rounded-xl prose-pre:shadow-lg prose-pre:my-8
           first-letter:text-6xl first-letter:font-bold first-letter:text-amber-600 first-letter:float-left first-letter:mr-3 first-letter:leading-[0.9]
+          -mb-18
         "
         >
           <PortableText value={post.body} components={PortableTextComponents} />
@@ -281,10 +282,10 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Products Section */}
       {post.products?.length > 0 && (
-        <section className="bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 py-16 mt-12 border-t border-slate-200 dark:border-slate-700">
+        <section className="bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 py-12 mt-10 border-t border-slate-200 dark:border-slate-700 -mb-12">
           <div className="container mx-auto px-4 max-w-6xl">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4">
+            <div className="text-center mb-4">
+              <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">
                 Recommended{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-600">
                   Products
@@ -295,13 +296,13 @@ export default async function BlogPostPage({ params }: Props) {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 -mb-2">
               {post.products.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
             </div>
 
-            <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-lg text-center">
+            {/* <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-lg text-center">
               <p className="text-sm text-slate-600">
                 <strong className="text-slate-900">
                   Affiliate Disclosure:
@@ -309,13 +310,13 @@ export default async function BlogPostPage({ params }: Props) {
                 We may earn a commission from purchases made through these links
                 at no extra cost to you.
               </p>
-            </div>
+            </div> */}
           </div>
         </section>
       )}
 
       {/* Newsletter CTA */}
-      <section className="container mx-auto px-4 py-16 max-w-4xl">
+      {/* <section className="container mx-auto px-4 py-16 max-w-4xl">
         <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-1/4 w-64 h-64 bg-amber-500 rounded-full blur-3xl"></div>
@@ -340,7 +341,7 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
