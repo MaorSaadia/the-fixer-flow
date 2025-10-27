@@ -68,12 +68,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: baseUrl,
     siteName: "The Fixer Flow",
-    title: "The Fixer Flow - Expert Home Improvement Solutions",
+    title: "The Fixer Flow - Expert Improvement Solutions",
     description:
-      "Discover expert home improvement tips, honest product reviews, and practical solutions for a smoother, more efficient home.",
+      "Discover expert improvement tips, honest product reviews, and practical solutions for a smoother, more efficient home.",
     images: [
       {
-        url: `https://the-fixer-flow.vercel.app/og-image.png`,
+        url: `https://the-fixer-flow.vercel.app/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: "The Fixer Flow - Improvement Solutions",
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     title: "The Fixer Flow - Expert Improvement Solutions",
     description:
       "Discover expert home improvement tips, honest product reviews, and practical solutions for a smoother home.",
-    images: [`https://the-fixer-flow.vercel.app/og-image.png`],
+    images: [`https://the-fixer-flow.vercel.app/opengraph-image.png`],
   },
 
   // Verification (Add when you have accounts)
