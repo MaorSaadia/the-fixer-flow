@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: "The Fixer Flow",
     images: [
       {
-        url: `${baseUrl}/og-home.jpg`,
+        url: `${baseUrl}/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: "The Fixer Flow Homepage",
@@ -33,10 +33,10 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "The Fixer Flow - Expert Home Improvement Solutions",
+    title: "The Fixer Flow - Expert Improvement Solutions",
     description:
       "Discover expert tips, honest reviews, and practical solutions for your home.",
-    images: [`${baseUrl}/twitter-home.jpg`],
+    images: [`${baseUrl}/opengraph-image.png`],
   },
 
   alternates: {
