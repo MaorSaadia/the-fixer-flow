@@ -10,8 +10,7 @@ import { Footer } from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 // Base URL - Update this to your production URL
-const baseUrl =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://the-fixer-flow.vercel.app";
+const baseUrl = "https://the-fixer-flow.vercel.app";
 
 export const metadata: Metadata = {
   // Basic Metadata
@@ -68,15 +67,16 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: baseUrl,
     siteName: "The Fixer Flow",
-    title: "The Fixer Flow - Expert Improvement Solutions",
+    title: "The Fixer Flow - Expert Home Improvement Solutions & Reviews",
     description:
-      "Discover expert improvement tips, honest product reviews, and practical solutions for a smoother, more efficient home.",
+      "Discover expert home improvement tips, product reviews, and practical solutions for a smoother, more efficient home.",
     images: [
       {
-        url: `https://the-fixer-flow.vercel.app/opengraph-image.png`,
+        url: "https://the-fixer-flow.vercel.app/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "The Fixer Flow - Improvement Solutions",
+        alt: "The Fixer Flow - Home Improvement Solutions",
+        type: "image/png",
       },
     ],
   },
@@ -86,10 +86,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@thefixerflow",
     creator: "@thefixerflow",
-    title: "The Fixer Flow - Expert Improvement Solutions",
+    title: "The Fixer Flow - Expert Home Improvement Solutions & Reviews",
     description:
       "Discover expert home improvement tips, honest product reviews, and practical solutions for a smoother home.",
-    images: [`https://the-fixer-flow.vercel.app/opengraph-image.png`],
+    images: ["https://the-fixer-flow.vercel.app/opengraph-image.png"],
   },
 
   // Verification (Add when you have accounts)
@@ -127,8 +127,6 @@ export default function RootLayout({
       <head>
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        {/* <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> */}
 
         {/* Theme Color */}
         <meta
