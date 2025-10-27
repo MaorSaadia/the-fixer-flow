@@ -86,9 +86,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@thefixerflow",
     creator: "@thefixerflow",
-    title: "The Fixer Flow - Expert Home Improvement Solutions & Reviews",
+    title: "The Fixer Flow - Expert Improvement Solutions & Reviews",
     description:
-      "Discover expert home improvement tips, honest product reviews, and practical solutions for a smoother home.",
+      "Discover expert improvement tips, honest product reviews, and practical solutions for a smoother home.",
     images: [`${baseUrl}/opengraph-image.png`],
   },
 

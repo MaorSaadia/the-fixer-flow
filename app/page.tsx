@@ -11,12 +11,12 @@ const baseUrl =
 export const metadata: Metadata = {
   title: "Home",
   description:
-    "Discover expert home improvement tips, product reviews, and practical solutions. From kitchen gadgets to smart home tech, get the best advice for a smoother, more efficient home.",
+    "Discover expert improvement tips, product reviews, and practical solutions. From kitchen gadgets to smart home tech, get the best advice for a smoother, more efficient home.",
 
   openGraph: {
-    title: "The Fixer Flow - Expert Home Improvement Solutions & Reviews",
+    title: "The Fixer Flow - Expert Improvement Solutions & Reviews",
     description:
-      "Discover expert home improvement tips, product reviews, and practical solutions for a smoother, more efficient home.",
+      "Discover expert improvement tips, product reviews, and practical solutions for a smoother, more efficient home.",
     url: baseUrl,
     siteName: "The Fixer Flow",
     images: [
