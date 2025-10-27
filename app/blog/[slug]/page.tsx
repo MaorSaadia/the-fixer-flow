@@ -12,10 +12,6 @@ import {
   TableOfContents,
   MobileTableOfContents,
 } from "@/components/TableOfContents";
-// import {
-//   SocialShareButtons,
-//   FloatingSocialShare,
-// } from "@/components/SocialShareButtons";
 import { PortableTextComponents } from "@/components/PortableTextComponents";
 import { ReadingProgressBar } from "@/components/ReadingProgressBar";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
@@ -25,6 +21,8 @@ import {
   generateArticleSchema,
   generateBreadcrumbSchema,
 } from "@/lib/metadata";
+import BlogShareButton from "@/components/BlogShareButton";
+// import { FloatingSocialShare } from "@/components/SocialShareButtons";
 
 const builder = imageUrlBuilder(baseClient);
 function urlFor(source: any) {
@@ -129,8 +127,11 @@ export default async function BlogPostPage({ params }: Props) {
     day: "numeric",
   });
 
-  // Get current URL for sharing
-  // const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+  // Inside your component, get the current URL (you'll need to construct it)
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://the-fixer-flow.vercel.app";
+  const currentUrl = `${baseUrl}/blog/${slug}`;
+  const imageUrl = post.mainImage ? urlFor(post.mainImage).url() : "";
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
@@ -220,17 +221,18 @@ export default async function BlogPostPage({ params }: Props) {
               <span>{post.readTime} min read</span>
             </div>
           )}
-          {/* 
-          <Button
-            variant="outline"
-            size="sm"
-            className="ml-auto border-slate-300 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300"
-          >
-            <Share2 className="w-4 h-4 mr-2" />
-            Share
-          </Button> */}
-        </div>
 
+          {/* Share Button - Pushed to the right */}
+          <div className="ml-auto">
+            <BlogShareButton
+              url={currentUrl}
+              title={post.title}
+              excerpt={post.excerpt}
+              image={imageUrl}
+              category={post.category}
+            />
+          </div>
+        </div>
         {/* Featured Image */}
         {post.mainImage && (
           <div className="relative w-full h-[400px] md:h-[600px] mb-12 rounded-2xl overflow-hidden shadow-2xl">
