@@ -73,10 +73,10 @@ export const metadata: Metadata = {
       "Discover expert home improvement tips, honest product reviews, and practical solutions for a smoother, more efficient home.",
     images: [
       {
-        url: `${baseUrl}/og-image.png`,
+        url: `https://the-fixer-flow.vercel.app/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "The Fixer Flow - Home Improvement Solutions",
+        alt: "The Fixer Flow - Improvement Solutions",
       },
     ],
   },
@@ -86,10 +86,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@thefixerflow",
     creator: "@thefixerflow",
-    title: "The Fixer Flow - Expert Home Improvement Solutions",
+    title: "The Fixer Flow - Expert Improvement Solutions",
     description:
       "Discover expert home improvement tips, honest product reviews, and practical solutions for a smoother home.",
-    images: [`${baseUrl}/og-image.png`],
+    images: [`https://the-fixer-flow.vercel.app/og-image.png`],
   },
 
   // Verification (Add when you have accounts)
