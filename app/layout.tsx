@@ -2,6 +2,7 @@
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 import { Header } from "@/components/Header";
@@ -144,6 +145,13 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={inter.className}>
+        {/* Umami Analytics */}
+        <Script
+          async
+          src="https://cloud.umami.is/script.js"
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+          strategy="beforeInteractive"
+        />
         <Header />
         <main className="container mx-auto p-4">{children}</main>
         <Footer />
