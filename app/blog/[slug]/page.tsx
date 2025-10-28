@@ -129,7 +129,8 @@ export default async function BlogPostPage({ params }: Props) {
   });
 
   // Inside your component, get the current URL (you'll need to construct it)
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "thefixerflow.com";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://thefixerflow.com";
   const currentUrl = `${baseUrl}/blog/${slug}`;
   const imageUrl = post.mainImage ? urlFor(post.mainImage).url() : "";
 

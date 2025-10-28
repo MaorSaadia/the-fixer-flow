@@ -299,10 +299,10 @@ export default function PrivacyPolicyPage() {
               contact us at:
               <br />
               <a
-                href="mailto:privacy@thefixerflow.com"
+                href="mailto:privacy@https://thefixerflow.com"
                 className="text-amber-600 dark:text-amber-500 font-bold hover:underline"
               >
-                privacy@thefixerflow.com
+                privacy@https://thefixerflow.com
               </a>
             </p>
           </section> */}

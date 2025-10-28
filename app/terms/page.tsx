@@ -67,9 +67,9 @@ export default function TermsPage() {
             <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
               Welcome to The Fixer Flow (&quot;we,&quot; &quot;us,&quot; or
               &quot;our&quot;). By accessing or using our website at{" "}
-              <span className="font-semibold">thefixerflow.com</span> (the
-              &quot;Site&quot;), you agree to comply with and be bound by these
-              Terms of Service (&quot;Terms&quot;).
+              <span className="font-semibold">https://thefixerflow.com</span>{" "}
+              (the &quot;Site&quot;), you agree to comply with and be bound by
+              these Terms of Service (&quot;Terms&quot;).
             </p>
 
             <p className="text-slate-700 dark:text-slate-300 leading-relaxed">

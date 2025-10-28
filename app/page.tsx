@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Wrench, Sparkles, TrendingUp } from "lucide-react";
 import { Metadata } from "next";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "thefixerflow.com";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://thefixerflow.com";
 
 export const metadata: Metadata = {
   title: "Home",
