@@ -2,8 +2,7 @@
 
 import { Metadata } from "next";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://the-fixer-flow.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "thefixerflow.com";
 const siteName = "The Fixer Flow";
 
 interface SEOProps {

@@ -1,7 +1,6 @@
 import { MetadataRoute } from "next";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://the-fixer-flow.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "thefixerflow.com";
 
 export default function robots(): MetadataRoute.Robots {
   return {

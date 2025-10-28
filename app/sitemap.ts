@@ -3,8 +3,7 @@
 import { MetadataRoute } from "next";
 import { baseClient } from "@/lib/sanity";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://the-fixer-flow.vercel.app";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "thefixerflow.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all posts

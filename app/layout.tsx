@@ -10,7 +10,7 @@ import { Footer } from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 // Base URL - Update this to your production URL
-const baseUrl = "https://the-fixer-flow.vercel.app";
+const baseUrl = "thefixerflow.com";
 
 export const metadata: Metadata = {
   // Basic Metadata
