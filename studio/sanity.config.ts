@@ -20,4 +20,11 @@ export default defineConfig({
   schema: {
     types: [post, blockContent, author, category, product],
   },
+
+  basePath: '/studio',
+
+  // CORS origins - Allow your production and local URLs
+  // cors: {
+  //   origins: ['http://localhost:3000', 'https://thefixerflow.com'],
+  // },
 })

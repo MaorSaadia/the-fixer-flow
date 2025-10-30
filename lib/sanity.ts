@@ -1,3 +1,4 @@
+import { tr } from "date-fns/locale";
 import { createClient } from "next-sanity";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -8,5 +9,5 @@ export const baseClient = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false,
+  useCdn: true,
 });
