@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { baseClient } from "@/lib/sanity";
+import { sanityFetch } from "@/sanity/lib/live";
 import { CategoryCard } from "@/components/CategoryCard";
 import { Metadata } from "next";
 import { Grid, Layers, Sparkles } from "lucide-react";
@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   description:
     "Browse all content categories on The Fixer Flow - Expert home improvement solutions organized by topic.",
 };
+
+// Add revalidation
+export const revalidate = 60;
 
 export interface Category {
   _id: string;
@@ -25,8 +28,7 @@ export interface Category {
   };
 }
 
-async function getCategories() {
-  // ✅ Update query to fetch image and expand asset URL
+async function getCategories(): Promise<Category[]> {
   const query = `*[_type == "category"] | order(title asc) {
     _id,
     title,
@@ -39,8 +41,14 @@ async function getCategories() {
     },
     "postCount": count(*[_type == "post" && references(^._id)])
   }`;
-  const categories = await baseClient.fetch<Category[]>(query);
-  return categories;
+
+  try {
+    const { data } = await sanityFetch({ query });
+    return (data || []) as Category[];
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return [];
+  }
 }
 
 export default async function CategoriesPage() {
