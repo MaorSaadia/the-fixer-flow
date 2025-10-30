@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { baseClient } from "@/lib/sanity";
+import { sanityFetch } from "@/sanity/lib/live";
 import { PostCard, Post } from "@/components/PostCard";
 import { Button } from "@/components/ui/button";
 import { Wrench, Sparkles, TrendingUp } from "lucide-react";
@@ -43,6 +43,9 @@ export const metadata: Metadata = {
   },
 };
 
+// Revalidate every 60 seconds (ISR)
+export const revalidate = 60;
+
 // This function fetches our 3 latest posts
 async function getLatestPosts() {
   const query = `*[_type == "post"] | order(publishedAt desc) [0...3] {
@@ -57,9 +60,10 @@ async function getLatestPosts() {
     "excerpt": array::join(string::split(pt::text(body), "")[0..150], "") + "..."
   }`;
 
-  const posts = await baseClient.fetch<Post[]>(query);
-  return posts;
+  const posts = await sanityFetch({ query });
+  return posts.data;
 }
+
 export default async function HomePage() {
   const posts = await getLatestPosts();
 
