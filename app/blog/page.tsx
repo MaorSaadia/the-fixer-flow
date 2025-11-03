@@ -1,4 +1,4 @@
-import { baseClient } from "@/lib/sanity";
+import { sanityFetch } from "@/sanity/lib/live";
 import { Post } from "@/components/PostCard"; // We will use the Post interface from PostCard
 import { BlogLayout } from "./BlogLayout"; // Our new interactive client component
 
@@ -18,8 +18,13 @@ async function getPosts() {
     "excerpt": array::join(string::split(pt::text(body), "")[0..150], "") + "..."
   }`;
 
-  const posts = await baseClient.fetch<Post[]>(query);
-  return posts;
+  try {
+    const { data } = await sanityFetch({ query });
+    return (data || []) as Post[];
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return [];
+  }
 }
 
 export default async function BlogPage() {
