@@ -6,7 +6,8 @@ import { Metadata } from "next";
 import { Clock, Calendar, ArrowLeft } from "lucide-react";
 
 import imageUrlBuilder from "@sanity/image-url";
-import { baseClient } from "@/lib/sanity";
+import { baseClient } from "@/sanity/lib/baseClient";
+import { sanityFetch } from "@/sanity/lib/live";
 import { PortableText } from "@portabletext/react";
 import {
   TableOfContents,
@@ -29,6 +30,9 @@ const builder = imageUrlBuilder(baseClient);
 function urlFor(source: any) {
   return builder.image(source);
 }
+
+// Add revalidation
+export const revalidate = 60;
 
 type Props = {
   params: Promise<{
@@ -56,8 +60,19 @@ interface Post {
   readTime: number;
 }
 
-async function getPost(slug: string) {
-  const query = `*[_type == "post" && slug.current == "${slug}"][0] {
+// Generate static paths for all blog posts at build time
+export async function generateStaticParams() {
+  const posts = await baseClient.fetch<{ slug: { current: string } }[]>(
+    `*[_type == "post" && defined(slug.current)]{ slug }`
+  );
+
+  return posts.map((post) => ({
+    slug: post.slug.current,
+  }));
+}
+
+async function getPost(slug: string): Promise<Post | null> {
+  const query = `*[_type == "post" && slug.current == $slug][0] {
     title,
     mainImage,
     body,
@@ -75,15 +90,60 @@ async function getPost(slug: string) {
     "excerpt": array::join(string::split(pt::text(body), "")[0..155], "") + "..."
   }`;
 
-  const post = await baseClient.fetch<Post>(query);
-  return post;
+  try {
+    const { data } = await sanityFetch({ query, params: { slug } });
+    return data as Post | null;
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    return null;
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPost(slug);
-  if (!post) return { title: "Post not found" };
-  return { title: post.title, description: post.excerpt };
+
+  if (!post) {
+    return {
+      title: "Post not found - The Fixer Flow",
+      description: "This blog post could not be found.",
+    };
+  }
+
+  const imageUrl = post.mainImage ? builder.image(post.mainImage).url() : "";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://thefixerflow.com";
+  const postUrl = `${baseUrl}/blog/${slug}`;
+
+  return {
+    title: `${post.title} | The Fixer Flow`,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: postUrl,
+      type: "article",
+      publishedTime: post.publishedAt,
+      authors: [post.author?.name || "The Fixer Flow Team"],
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [imageUrl],
+    },
+    alternates: {
+      canonical: postUrl,
+    },
+  };
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -93,10 +153,14 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-slate-900 mb-4">
+        <div className="container mx-auto px-4 py-20 text-center">
+          <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4">
             Post not found
           </h1>
+          <p className="text-slate-600 dark:text-slate-400 mb-8">
+            The blog post you&apos;re looking for doesn&apos;t exist or has been
+            removed.
+          </p>
           <Button asChild>
             <Link href="/blog">Back to Blog</Link>
           </Button>
@@ -112,7 +176,6 @@ export default async function BlogPostPage({ params }: Props) {
     slug,
     image: post.mainImage ? builder.image(post.mainImage).url() : "",
     publishedAt: post.publishedAt,
-    // updatedAt: post._updatedAt,
     author: post.author?.name,
   });
 
@@ -128,7 +191,6 @@ export default async function BlogPostPage({ params }: Props) {
     day: "numeric",
   });
 
-  // Inside your component, get the current URL (you'll need to construct it)
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://thefixerflow.com";
   const currentUrl = `${baseUrl}/blog/${slug}`;
@@ -234,6 +296,7 @@ export default async function BlogPostPage({ params }: Props) {
             category={post.category}
           />
         </div>
+
         {/* Featured Image */}
         {post.mainImage && (
           <div className="relative w-full h-[400px] md:h-[600px] mb-12 rounded-2xl overflow-hidden shadow-2xl">
@@ -244,7 +307,6 @@ export default async function BlogPostPage({ params }: Props) {
               style={{ objectFit: "cover" }}
               priority
             />
-            {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent"></div>
           </div>
         )}
@@ -301,47 +363,9 @@ export default async function BlogPostPage({ params }: Props) {
                 <ProductCard key={product._id} product={product} />
               ))}
             </div>
-
-            {/* <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-lg text-center">
-              <p className="text-sm text-slate-600">
-                <strong className="text-slate-900">
-                  Affiliate Disclosure:
-                </strong>{" "}
-                We may earn a commission from purchases made through these links
-                at no extra cost to you.
-              </p>
-            </div> */}
           </div>
         </section>
       )}
-
-      {/* Newsletter CTA */}
-      {/* <section className="container mx-auto px-4 py-16 max-w-4xl">
-        <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-8 md:p-12 text-center text-white relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-1/4 w-64 h-64 bg-amber-500 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-orange-500 rounded-full blur-3xl"></div>
-          </div>
-
-          <div className="relative z-10">
-            <h3 className="text-3xl font-bold mb-4">Loved this guide?</h3>
-            <p className="text-slate-300 text-lg mb-8">
-              Subscribe to get more expert tips delivered to your inbox weekly.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-6 py-3 rounded-lg text-slate-100 ring-2 ring-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500"
-              />
-              <Button className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-semibold px-8 py-4 mt-1">
-                Subscribe
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section> */}
     </div>
   );
 }
